@@ -37,7 +37,7 @@ List any prerequisites that users need to have installed before they can use you
 Provide installation instructions, code, and commands. Make it clear and easy for users to set up your project.
 
 ```shell
-$ git clone https://github.com/sein-dev/qcells-lcoe.git
+$ git clone https://github.com/sudo-sein/qcells-lcoe.git
 $ cd qcells-lcoe
 $ virtualenv venv
 $ source venv/bin/activate
