@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development settings
+instance/
+*.env
+
+# Logs and databases
+*.log
+*.sqlite
+20231016_Simplified_LCOE.xlsm
+~$*
+
+# IDE files
+.vscode/
+.idea/
+
+# Dependencies
+venv/
+env/

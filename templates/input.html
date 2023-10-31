@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PV Power Plant Calculator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">PV Power Plant Calculator</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <h3>General Information</h3>
+            </div>
+            <div class="form-group">
+                <label for="project_lifetime">Project Lifetime (years):</label>
+                <input type="number" class="form-control" name="project_lifetime" required>
+            </div>
+            <div class="form-group">
+                <label for="nominal_power_kwp">Nominal Power (kWp):</label>
+                <input type="number" class="form-control" name="nominal_power_kwp" required>
+            </div>
+            <div class="form-group">
+                <label for="annual_yield_kwh_kwp">Annual Yield per kWp (kWh/kWp):</label>
+                <input type="number" class="form-control" step="0.1" name="annual_yield_kwh_kwp" required>
+            </div>
+            <div class="form-group">
+                <label for="degradation_percent_per_year">Degradation (%/year):</label>
+                <input type="number" class="form-control" step="0.001" name="degradation_percent_per_year" required>
+            </div>
+            
+            <div class="form-group">
+                <h3>Feed in tariff / PPA</h3>
+            </div>
+            <div class="form-group">
+                <label for="years">Years:</label>
+                <input type="number" class="form-control" name="years" required>
+            </div>
+            <div class="form-group">
+                <label for="price_eur_per_kwh">Price (EUR/kWh):</label>
+                <input type="number" class="form-control"  step="0.01" name="price_eur_per_kwh" required>
+            </div>
+            <div class="form-group">
+                <label for="index_percent">Index:</label>
+                <input type="number" class="form-control" name="index_percent" required>
+            </div>
+            <div class="form-group">
+                <h3>Total Installation Price (TiP) (all in)</h3>
+            </div>
+            <div class="form-group">
+                <label for="total_installation_price_eur">Total Installation Price (€):</label>
+                <input type="number" class="form-control" name="total_installation_price_eur" required>
+            </div>
+            <div class="form-group">
+                <h3>Operational costs</h3>
+            </div>
+            <div class="form-group">
+                <label for="insurance_premium_percent">Insurance Premium (% of TiP/year):</label>
+                <input type="number" class="form-control" step="0.000001" name="insurance_premium_percent" required>
+            </div>
+            <div class="form-group">
+                <label for="maintenance_percent">Maintenance (% of TiP/year):</label>
+                <input type="number" class="form-control" step="0.001" name="maintenance_percent" required>
+            </div>
+            <div class="form-group">
+                <label for="inflation_rate_percent">Inflation Rate (%/year):</label>
+                <input type="number" class="form-control" step="0.01" name="inflation_rate_percent" required>
+            </div>
+            <div class="form-group">
+                <h3>Financing</h3>
+            </div>
+            <div class="form-group">
+                <label for="discount_rate_percent">Discount Rate of Alternative Account (%):</label>
+                <input type="number" class="form-control" step="0.01" name="discount_rate_percent" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+        <div class="mb-5"></div>
+    </div>
+</body>
+</html>

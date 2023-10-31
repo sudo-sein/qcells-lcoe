@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PV Power Plant Calculator - Results</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-4">PV Power Plant Calculator - Results</h1>
+
+      <h2 class="mt-4">Summary Table:</h2>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Summary Field</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nominal power (kWp)</td>
+            <td>{{ summary.nominal_power_kw }}</td>
+          </tr>
+          <tr>
+            <td>Present value of net income (€)</td>
+            <td>{{ summary.net_income_eur | currency }}</td>
+          </tr>
+          <tr>
+            <td>Levelised costs of electricity "LCOE" (€/kWh)</td>
+            <td>{{ summary.lcoe_eur_per_kwh }}</td>
+          </tr>
+          <tr>
+            <td>Return on Investment (%)</td>
+            <td>{{ summary.roi_percent | currency }}%</td>
+          </tr>
+          <tr>
+            <td>NPV</td>
+            <td>{{ summary.npv_eur | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="mt-4">Cash Flow Table:</h2>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <button
+            class="nav-link active"
+            id="cashflow-tab"
+            data-toggle="tab"
+            data-target="#cashflow"
+            type="button"
+            role="tab"
+          >
+            Cashflows
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="lcoe-tab"
+            data-toggle="tab"
+            data-target="#lcoe"
+            type="button"
+            role="tab"
+          >
+            LCOE
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="helplines-tab"
+            data-toggle="tab"
+            data-target="#helplines"
+            type="button"
+            role="tab"
+          >
+            Helplines
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="cashflow" role="tabpanel">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Energy Production (kWh)</th>
+                <th>Revenue from FIT (EUR)</th>
+                <th>Insurance (EUR)</th>
+                <th>Maintenance (EUR)</th>
+                <th>Earnings (EUR)</th>
+                <th>Income Cumulative (EUR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for year, cashflow in cashflows.items() %}
+              <tr>
+                <td>{{ year }}</td>
+                <td>{{ cashflow['energy_production'] | currency }}</td>
+                <td>{{ cashflow['revenue_fit'] | currency }}</td>
+                <td>{{ cashflow['insurance'] | currency }}</td>
+                <td>{{ cashflow['maintenance'] | currency }}</td>
+                <td>{{ cashflow['earnings'] | currency }}</td>
+                <td>{{ cashflow['income_cumulative'] | currency }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="lcoe" role="tabpanel">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Income with LCOE (EUR)</th>
+                <th>Income after Costs (Cash) (EUR)</th>
+                <th>Discounted Cash (EUR)</th>
+                <th>Present Value (EUR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for year, cashflow in cashflows.items() %}
+              <tr>
+                <td>{{ year }}</td>
+                <td>{{ cashflow['income_with_lcoe'] | currency }}</td>
+                <td>{{ cashflow['income_after_costs'] | currency }}</td>
+                <td>{{ cashflow['discounted_cash'] | currency }}</td>
+                <td>{{ cashflow['present_value'] | currency }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tab-pane fade" id="helplines" role="tabpanel">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Project Lifetime</th>
+                <th>FIT Period</th>
+                <th>ROI Calculation</th>
+                <th>Net Present Value Calculation</th>
+                <th>Power Degradation (%)</th>
+                <th>Remaining Power (kWh)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for year, cashflow in cashflows.items() %}
+              <tr>
+                <td>{{ year }}</td>
+                <td>{{ cashflow['project_lifetime'] }}</td>
+                <td>{{ cashflow['fit_period'] }}</td>
+                <td>{{ cashflow['roi_calculation'] | currency }}</td>
+                <td>{{ cashflow['npv_calculation'] | currency }}</td>
+                <td>{{ cashflow['power_degradation'] }}%</td>
+                <td>{{ cashflow['remaining_power'] | currency }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <a href="/">Go Back</a>
+    </div>
+  </body>
+</html>
